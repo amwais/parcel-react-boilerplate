@@ -1,9 +1,8 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Store } from '../../store';
 
-const DummyComponent = (props) => {
-	const { dummy } = useContext(Store).store;
-	const [ state, dispatch ] = dummy;
+const DummyComponent = () => {
+	const [ state, dispatch ] = useContext(Store).store.dummy;
 
 	const { counter } = state;
 
