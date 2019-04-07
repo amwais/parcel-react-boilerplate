@@ -1,0 +1,77 @@
+{
+  "name": "template",
+  "private": true,
+  "version": "1.0.0",
+  "description": "template",
+  "main": "src/index.js",
+  "repository": "",
+  "authors": [],
+  "scripts": {
+    "start": "NODE_ENV=development parcel src/index.html --open",
+    "build": "NODE_ENV=production parcel build src/index.html --public-url https://marsbased.github.io/my-awesome-app/",
+    "precommit": "lint-staged",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d dist",
+    "test": "jest",
+    "test:eslint": "eslint src/ --ext .js --ext .jsx"
+  },
+  "lint-staged": {
+    "*.{js,jsx,scss,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "collectCoverageFrom": [
+      "src/**"
+    ]
+  },
+  "postcss": {
+    "modules": false,
+    "plugins": {
+      "autoprefixer": {
+        "browsers": [
+          ">1%",
+          "last 4 versions",
+          "Firefox ESR",
+          "not ie < 9"
+        ],
+        "flexbox": "no-2009"
+      }
+    }
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "jwt-decode": "^2.2.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.4.0-0",
+    "react-dom": "^16.8.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^8.5.0",
+    "babel-eslint": "^8.2.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.8.2",
+    "husky": "^0.14.3",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.0.0",
+    "lint-staged": "^7.1.0",
+    "node-sass": "^4.9.0",
+    "parcel-bundler": "^1.8.1",
+    "parcel-plugin-bundle-visualiser": "^1.1.2",
+    "prettier": "^1.12.1",
+    "react-hot-loader": "^4.2.0"
+  }
+}
