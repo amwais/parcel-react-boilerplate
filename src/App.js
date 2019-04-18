@@ -8,31 +8,6 @@ import DummyComponent from './components/DummyComponent';
 
 import './App.css';
 
-const handleAuth = (authDispatch) => {
-	// Check for token
-	if (localStorage.jwtToken) {
-		// Set auth token header auth
-		setAuthToken(localStorage.jwtToken);
-
-		// Decode token and get user info and expiration
-		const decoded = jwt_decode(localStorage.jwtToken);
-
-		// Set user and isAuthenticated
-		authDispatch(setCurrentUser(decoded));
-
-		// Check for expired token
-		const currentTime = Date.now() / 1000;
-
-		if (decoded.exp < currentTime) {
-			// Logout user
-			authDispatch(logoutUser());
-
-			// Redirect to login
-			window.location.href = '/';
-		}
-	}
-};
-
 // eslint-disable-next-line react/prop-types
 const PrivateRoute = ({ component: Component, ...rest }) => {
 	const store = useContext(Store).store;
@@ -46,11 +21,36 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 const App = () => {
+	const handleAuth = () => {
+		// Check for token
+		if (localStorage.jwtToken) {
+			// Set auth token header auth
+			setAuthToken(localStorage.jwtToken);
+
+			// Decode token and get user info and expiration
+			const decoded = jwt_decode(localStorage.jwtToken);
+
+			// Set user and isAuthenticated
+			authDispatch(setCurrentUser(decoded));
+
+			// Check for expired token
+			const currentTime = Date.now() / 1000;
+
+			if (decoded.exp < currentTime) {
+				// Logout user
+				authDispatch(logoutUser());
+
+				// Redirect to login
+				window.location.href = '/';
+			}
+		}
+	};
+
 	const store = useContext(Store).store;
-	const authDispatch = store.auth[1];
+	const [ authState, authDispatch ] = store.auth;
 
 	useEffect(() => {
-		handleAuth(authDispatch);
+		handleAuth();
 	});
 
 	return (
