@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Store } from '../../store';
 
 const DummyComponent = () => {
-	const [ state, dispatch ] = useContext(Store).store.dummy;
+	const [ state, dispatch ] = useContext(Store).dummy;
 
 	const { counter } = state;
 
