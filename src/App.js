@@ -10,7 +10,7 @@ import './App.css';
 
 // eslint-disable-next-line react/prop-types
 const PrivateRoute = ({ component: Component, ...rest }) => {
-	const store = useContext(Store).store;
+	const store = useContext(Store);
 	const authState = store.auth[0];
 	return (
 		<Route
@@ -46,7 +46,7 @@ const App = () => {
 		}
 	};
 
-	const store = useContext(Store).store;
+	const store = useContext(Store);
 	const [ authState, authDispatch ] = store.auth;
 
 	useEffect(() => {
